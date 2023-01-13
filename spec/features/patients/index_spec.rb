@@ -36,7 +36,10 @@ RSpec.describe "Patient Index Page" do
       expect(page).to_not have_content(@paitent_4)
         # require 'pry';binding.pry
       expect(@paitent_2.name).to appear_before(@paitent_1.name)
-      # , @paitent_3.name, @paitent_5.name])
+      expect(@paitent_1.name).to appear_before(@paitent_3.name)
+      expect(@paitent_3.name).to appear_before(@paitent_5.name)
+
+      
     end
 
 

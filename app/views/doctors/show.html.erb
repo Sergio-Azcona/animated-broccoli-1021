@@ -1,13 +1,15 @@
 <h1><center><%= @doctor.name %></center></h1>
-Info: 
-<p><%= @doctor.hospital.name%></p>
-<p><%= @doctor.specialty %></p>
-<p><%= @doctor.university %></p>
-
+Doctor Information: 
+<p>Hosptial: <%= @doctor.hospital.name%></p>
+<p>Specialty: <%= @doctor.specialty %></p>
+<p>University: <%= @doctor.university %></p>
+<br>
+Doctor's Patients:
 <ul>
 <p><% @doctor.patients.each do |patient| %></p>
   <div id="patients-<%= patient.id %>">
     <ol><%= patient.name %></ol>
+   # <p><%= link_to "Remove Patient",doctor_patient_path(@doctor, patient), method: :delete %>
   </div>
 <% end%>
 </ul>

@@ -26,14 +26,13 @@ RSpec.describe "Doctor Show Page" do
     @doc_patient_6 = DoctorPatient.create!(doctor: @alex, patient: @paitent_5)
     @doc_patient_7 = DoctorPatient.create!(doctor: @alex, patient: @paitent_4)
     @doc_patient_8 = DoctorPatient.create!(doctor: @alex, patient: @paitent_1)
-
-    visit("/doctors/#{@derek.id}")
   end
-
+  
   describe "User Story 1" do
     describe "displays all of that doctor's attribute information and hospital where they work" do
       it "also displays  all of the patients this doctor has" do
-        # require 'pry';binding.pry
+        visit("/doctors/#{@derek.id}")
+        # save_and_open_page
         expect(page).to have_content(@derek.name)
         expect(page).to have_content(@derek.specialty)
         expect(page).to have_content(@derek.university)
@@ -42,9 +41,36 @@ RSpec.describe "Doctor Show Page" do
         expect(page).to have_content(@paitent_5.name)
       end
     end
-
-
   end
 
+  describe "User Story 2, Remove a Patient from a Doctor" do
+    describe "next to each patient's name is a button to remove that patient from that doctor's caseload" do
+      describe "When I click that button for one patient I'm brought back to the Doctor's show page" do
+        describe "still displays that patient on the other doctors showpage if they are caring for the same patient" do
+          it "no longer displays that patient's name listed on the Doctor's show page" do
+          
+            visit("/doctors/#{@meredith.id}")
+            expect(page).to have_content(@paitent_5.name)
+            expect(current_path).to eq("/doctors/#{@meredith.id}")
+                
+            visit("/doctors/#{@derek.id}")
+            expect(current_path).to eq("/doctors/#{@derek.id}")
+
+              within("#patients-#{@paitent_5.id}") do
+                expect(page).to have_content(@paitent_5.name)
+                expect(page).to have_link("Remove Patient")
+                click_link("Remove Patient")
+              end        
+              
+            expect(current_path).to eq("/doctors/#{@derek.id}")
+            expect(page).to_not have_content(@paitent_5.name)
+
+            visit("/doctors/#{@meredith.id}")
+            expect(page).to have_content(@paitent_5.name)
+          end
+        end
+      end
+    end
+  end
   
 end

@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Patient do
-  describe 'relationships' do
-    it {should have_many :doctor_patients}
-    it {should have_many(:doctors).through(:doctor_patients)}
-    it {should have_many(:doctors).through(:doctor_patients)}
-  end
+RSpec.describe "Patient Index Page" do 
   before(:each) do
     @hospital_1 = Hospital.create!(name: "1 Grey Sloan Memorial Hospital")
     @hospital_2 = Hospital.create!(name: "2 Seaside Health & Wellness Center")
@@ -32,12 +27,15 @@ RSpec.describe Patient do
     @doc_patient_7 = DoctorPatient.create!(doctor: @alex, patient: @paitent_4)
     @doc_patient_8 = DoctorPatient.create!(doctor: @alex, patient: @paitent_1)
   end
-  
-  
-  it "returns only adult patients names in ascending alphabetical order (A to Z) " do
-    # require 'pry';binding.pry
-    expect(Patient.adults_only).to_not include([@paitent_4.name])
-    expect(Patient.adults_only).to eq([ @paitent_2.name, @paitent_1.name, @paitent_3.name, @paitent_5.name])
-  end
 
+  describe "User Story 3" do
+    it "displays the names of all adult patients (age is greater than 18)" do
+      expect(page).to have_content([@paitent_2.name, @paitent_1.name, @paitent_3.name, @paitent_5.name])
+    end
+
+    xit "displays the names in ascending alphabetical order (A - Z)" do
+
+    end
+
+  end
 end

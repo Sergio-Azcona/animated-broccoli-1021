@@ -10,22 +10,22 @@ RSpec.describe "Patient Index Page" do
     @miranda =  @hospital_2.doctors.create!(name: "Miranda Bailey", specialty: "General Surgery", university: "Stanford University")
     @derek =    @hospital_2.doctors.create!(name: "Derek McDreamy Shepherd", specialty: "Attending Surgeon", university: "University of Pennsylvania")
     
-    @paitent_1 = Patient.create!(name: "Katie Bryce", age: 24)
-    @paitent_2 = Patient.create!(name: "Denny Duquette", age: 39)
-    @paitent_3 = Patient.create!(name: "Rebecca Pope", age: 32)
-    @paitent_4 = Patient.create!(name: "Zola Shepherd", age: 2)
-    @paitent_5 = Patient.create!(name: "Zero", age: 39)
+    @patient_1 = Patient.create!(name: "Katie Bryce", age: 24)
+    @patient_2 = Patient.create!(name: "Denny Duquette", age: 39)
+    @patient_3 = Patient.create!(name: "Rebecca Pope", age: 32)
+    @patient_4 = Patient.create!(name: "Zola Shepherd", age: 2)
+    @patient_5 = Patient.create!(name: "Zero", age: 39)
 
-    @doc_patient_1 = DoctorPatient.create!(doctor: @meredith, patient: @paitent_1)
-    @doc_patient_2 = DoctorPatient.create!(doctor: @meredith, patient: @paitent_2)
-    @doc_patient_3 = DoctorPatient.create!(doctor: @meredith, patient: @paitent_5)
+    @doc_patient_1 = DoctorPatient.create!(doctor: @meredith, patient: @patient_1)
+    @doc_patient_2 = DoctorPatient.create!(doctor: @meredith, patient: @patient_2)
+    @doc_patient_3 = DoctorPatient.create!(doctor: @meredith, patient: @patient_5)
     
-    @doc_patient_4 = DoctorPatient.create!(doctor: @derek, patient: @paitent_5)
-    @doc_patient_5 = DoctorPatient.create!(doctor: @derek, patient: @paitent_3)
+    @doc_patient_4 = DoctorPatient.create!(doctor: @derek, patient: @patient_5)
+    @doc_patient_5 = DoctorPatient.create!(doctor: @derek, patient: @patient_3)
     
-    @doc_patient_6 = DoctorPatient.create!(doctor: @alex, patient: @paitent_5)
-    @doc_patient_7 = DoctorPatient.create!(doctor: @alex, patient: @paitent_4)
-    @doc_patient_8 = DoctorPatient.create!(doctor: @alex, patient: @paitent_1)
+    @doc_patient_6 = DoctorPatient.create!(doctor: @alex, patient: @patient_5)
+    @doc_patient_7 = DoctorPatient.create!(doctor: @alex, patient: @patient_4)
+    @doc_patient_8 = DoctorPatient.create!(doctor: @alex, patient: @patient_1)
   end
 
   describe "User Story 3- displays the names of all adult patients only (age is greater than 18)" do
@@ -33,11 +33,11 @@ RSpec.describe "Patient Index Page" do
 
      visit patients_path
       #  save_and_open_page
-      expect(page).to_not have_content(@paitent_4)
+      expect(page).to_not have_content(@patient_4)
         # require 'pry';binding.pry
-      expect(@paitent_2.name).to appear_before(@paitent_1.name)
-      expect(@paitent_1.name).to appear_before(@paitent_3.name)
-      expect(@paitent_3.name).to appear_before(@paitent_5.name)
+      expect(@patient_2.name).to appear_before(@patient_1.name)
+      expect(@patient_1.name).to appear_before(@patient_3.name)
+      expect(@patient_3.name).to appear_before(@patient_5.name)
 
       
     end

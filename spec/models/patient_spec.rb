@@ -36,6 +36,7 @@ RSpec.describe Patient do
   
   it "returns only adult patients names in ascending alphabetical order (A to Z) " do
     # require 'pry';binding.pry
+    
     expect(Patient.adults_only).to_not include([@paitent_4.name])
     expect(Patient.adults_only).to eq([ @paitent_2.name, @paitent_1.name, @paitent_3.name, @paitent_5.name])
   end

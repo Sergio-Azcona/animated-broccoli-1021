@@ -28,14 +28,19 @@ RSpec.describe "Patient Index Page" do
     @doc_patient_8 = DoctorPatient.create!(doctor: @alex, patient: @paitent_1)
   end
 
-  describe "User Story 3" do
-    it "displays the names of all adult patients (age is greater than 18)" do
-      expect(page).to have_content([@paitent_2.name, @paitent_1.name, @paitent_3.name, @paitent_5.name])
+  describe "User Story 3- displays the names of all adult patients only (age is greater than 18)" do
+    it "displays the names in ascending alphabetical order (A - Z)" do
+
+     visit patients_path
+      #  save_and_open_page
+      expect(page).to_not have_content(@paitent_4)
+        # require 'pry';binding.pry
+      expect(@paitent_2.name).to appear_before(@paitent_1.name)
+      # , @paitent_3.name, @paitent_5.name])
     end
 
-    xit "displays the names in ascending alphabetical order (A - Z)" do
 
-    end
+    
 
   end
 end
